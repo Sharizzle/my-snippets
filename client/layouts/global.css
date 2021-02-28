@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Quicksand';
+  src: local('Quicksand'),
+    url(~assets/fonts/Quicksand/Quicksand-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  src: local('SourceSansPro'),
+    url(~assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf)
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'DancingScript';
+  src: local('DancingScript'),
+    url(~assets/fonts/DancingScript/DancingScript-Regular.ttf)
+      format('truetype');
+}
+
+:root {
+  --primary: #282a36;
+  /* --secondary: #314f8d; */
+  --secondary: white;
+  /* --background: #f5f5f5; */
+  --background: #282a36;
+  --tertiary: #238625;
+  --active: #8be9fd;
+  --white: white;
+}
+
+html {
+  font-family: 'SourceSansPro';
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  background: var(--background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
