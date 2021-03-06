@@ -35,5 +35,17 @@ var Routes = router.RoutePrefix{
 			"/{codeId}",
 			UpdateHandler,
 		},
+		router.Route{
+			"OptionHandler",
+			"OPTIONS",
+			"/{codeId}",
+			OptionHandler,
+		},
+		router.Route{
+			"OptionHandler",
+			"OPTIONS",
+			"",
+			OptionHandler,
+		},
 	},
 }

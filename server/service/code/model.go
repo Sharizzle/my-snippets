@@ -1,7 +1,7 @@
 package code
 
 type Code struct {
-	ID   int `gorm:"primary_key" json:"id"`
+	ID   uint `json:"id" gorm:"primaryKey"`
 	Date string `json:"date"`
 	Title string `json:"title"`
 	Description string `json:"description"`

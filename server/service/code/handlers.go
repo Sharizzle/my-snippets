@@ -12,8 +12,15 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	var codes []Code
 	db.DB.Find(&codes)
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("X-Total-Count", "10")
 	json.NewEncoder(w).Encode(codes)
 }
+
+func OptionHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w)
+}
+
 
 func ShowHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -25,11 +32,9 @@ func ShowHandler(w http.ResponseWriter, r *http.Request) {
 
 func CreateHandler(w http.ResponseWriter, r *http.Request) {
 	var code Code
-	code.Date = r.FormValue("date")
-	code.Title = r.FormValue("title")
-	code.Description = r.FormValue("description")
-	code.Category = r.FormValue("category")
-	code.Content = r.FormValue("content")
+
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&code)	
 
 	err := db.DB.Create(&code).Error
 	if err != nil {
@@ -59,11 +64,13 @@ func UpdateHandler(w http.ResponseWriter, r *http.Request){
 	var code Code
 	
 	db.DB.First(&code, params["codeId"])
-	db.DB.Model(&code).Update("date", r.FormValue("date"))
-	db.DB.Model(&code).Update("title", r.FormValue("title"))
-	db.DB.Model(&code).Update("description", r.FormValue("description"))
-	db.DB.Model(&code).Update("category", r.FormValue("category"))
-	db.DB.Model(&code).Update("content", r.FormValue("content"))
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&code)
 
+	db.DB.Model(&code).Save(&code)
+
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&code)
+
+
 }
